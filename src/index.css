@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
+:root {
+  --primary: #FFB347;     /* Bright Orange */
+  --secondary: #77DD77;   /* Pastel Green */
+  --accent: #FF6961;      /* Soft Red */
+  --background: #E0FFFF;  /* Light Cyan */
+  --text-dark: #2C3E50;
+  --text-light: #FFFFFF;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  
+  --shadow-sm: 0 4px 8px rgba(0,0,0,0.1);
+  --shadow-md: 0 8px 16px rgba(0,0,0,0.15);
+  --shadow-lg: 0 12px 24px rgba(0,0,0,0.2);
+  --radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--background);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  user-select: none; /* Kid friendly to prevent text selection while tapping */
+  -webkit-user-select: none;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}

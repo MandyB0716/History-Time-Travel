@@ -1,0 +1,53 @@
+.timeline-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: var(--card-bg);
+  position: relative;
+  border-top: 4px solid var(--text-dark);
+  z-index: 20;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  right: 40px;
+  height: 8px;
+  background-color: var(--text-dark);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.timeline-node {
+  position: relative;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid var(--text-dark);
+  font-size: 1.5rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.timeline-node.locked {
+  background-color: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.timeline-node.unlocked {
+  background-color: var(--secondary);
+  color: var(--text-dark);
+}
+
+.timeline-node.active {
+  background-color: var(--primary);
+  transform: scale(1.3);
+  box-shadow: 0 0 15px rgba(255, 179, 71, 0.8);
+}

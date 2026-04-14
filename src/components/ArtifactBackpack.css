@@ -1,0 +1,39 @@
+.backpack-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+  max-width: 250px;
+  border: 3px solid var(--primary);
+}
+
+.backpack-container h3 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.artifacts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.artifact-item {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--secondary);
+}

@@ -1,0 +1,50 @@
+.lesson-container {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lesson-container h1 {
+  font-size: 3.5rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.lesson-content h2 {
+  font-size: 2rem;
+  color: var(--secondary);
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.5); /* better contrast */
+  margin-bottom: 20px;
+}
+
+.lesson-content p {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.lesson-progress {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.lesson-progress .dot {
+  width: 15px;
+  height: 15px;
+  background-color: #cbd5e1;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.lesson-progress .dot.active {
+  background-color: var(--primary);
+  transform: scale(1.4);
+}
