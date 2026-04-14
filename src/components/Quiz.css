@@ -5,6 +5,37 @@
   box-shadow: var(--shadow-lg);
   text-align: center;
   max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .quiz-container {
+    padding: 20px;
+  }
+  .quiz-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .options-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .quiz-option {
+    width: 100%;
+    max-width: 300px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 15px 20px;
+  }
+  .option-image {
+    font-size: 3rem;
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+  .option-label {
+    font-size: 1.4rem;
+  }
 }
 
 .quiz-container h2 {

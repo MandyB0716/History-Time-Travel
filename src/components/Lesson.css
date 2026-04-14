@@ -5,9 +5,41 @@
   box-shadow: var(--shadow-lg);
   text-align: center;
   max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.lesson-image {
+  font-size: 6rem;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+  .lesson-container {
+    padding: 20px;
+    gap: 15px;
+  }
+  .lesson-container h1 {
+    font-size: 2.5rem;
+  }
+  .lesson-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  .lesson-content p {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  .lesson-image {
+    font-size: 4.5rem;
+  }
 }
 
 .lesson-container h1 {
