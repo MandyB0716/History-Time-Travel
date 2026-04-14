@@ -26,7 +26,6 @@ export default function Quiz({ era, onWin }) {
             onClick={() => handleOptionClick(option)}
           >
             <span className="option-image">{option.image}</span>
-            <span className="option-label">{option.label}</span>
           </button>
         ))}
       </div>
