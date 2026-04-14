@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Lesson.css';
+import { speakText } from '../utils/speech';
 
 export default function Lesson({ era, onContinue, onHome }) {
   const [lessonIndex, setLessonIndex] = useState(0);
@@ -26,7 +27,12 @@ export default function Lesson({ era, onContinue, onHome }) {
       <h1>{era.title}</h1>
 
       <div className="lesson-content">
-        <h2>Part {lessonIndex + 1}: {currentLesson.subtitle}</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '15px' }}>
+          <h2>Part {lessonIndex + 1}: {currentLesson.subtitle}</h2>
+          <button onClick={() => speakText(`Part ${lessonIndex + 1}: ${currentLesson.subtitle}. ${currentLesson.text}`)} aria-label="Read lesson out loud" style={{ background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>
+            <span aria-hidden="true">🔊</span>
+          </button>
+        </div>
         {currentLesson.image && <div className="lesson-image" aria-hidden="true">{currentLesson.image}</div>}
         <p>{currentLesson.text}</p>
       </div>

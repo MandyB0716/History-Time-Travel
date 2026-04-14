@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Quiz.css';
+import { speakText } from '../utils/speech';
 
 export default function Quiz({ era, onWin, onHome }) {
   const [bouncingId, setBouncingId] = useState(null);
@@ -20,7 +21,13 @@ export default function Quiz({ era, onWin, onHome }) {
       <button onClick={onHome} aria-label="Return to Main Menu" style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>
         <span aria-hidden="true">🏠</span>
       </button>
-      <h2>{era.quiz.question}</h2>
+      
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '15px', marginBottom: '20px' }}>
+        <h2 style={{ marginBottom: 0 }}>{era.quiz.question}</h2>
+        <button onClick={() => speakText(era.quiz.question)} aria-label="Read question out loud" style={{ background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>
+          <span aria-hidden="true">🔊</span>
+        </button>
+      </div>
       <div className="options-grid">
         {era.quiz.options.map(option => (
           <button
