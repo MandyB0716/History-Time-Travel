@@ -8,15 +8,10 @@ import { eras } from './data/eras';
 import './App.css';
 
 export default function App() {
-  const [started, setStarted] = useState(false);
   const [currentEraIndex, setCurrentEraIndex] = useState(0);
   const [unlockedEras, setUnlockedEras] = useState([0]);
   const [artifacts, setArtifacts] = useState([]);
-  const [viewState, setViewState] = useState('lesson'); // 'lesson', 'quiz', 'reward', 'end'
-
-  const handleStart = () => {
-    setStarted(true);
-  };
+  const [viewState, setViewState] = useState('menu'); // 'menu', 'map', 'backpack', 'lesson', 'quiz', 'reward', 'end'
 
   const handleTimelineClick = (index) => {
     if (unlockedEras.includes(index)) {
@@ -39,7 +34,7 @@ export default function App() {
         setUnlockedEras([...unlockedEras, nextIndex]);
       }
       setCurrentEraIndex(nextIndex);
-      setViewState('lesson');
+      setViewState('map');
     } else {
       setViewState('end');
     }
@@ -47,22 +42,54 @@ export default function App() {
 
   const currentEra = eras[currentEraIndex];
 
+  const isEraView = ['lesson', 'quiz', 'reward'].includes(viewState);
+  const bgColor = isEraView ? currentEra.color : 'var(--background)';
+
   return (
-    <div className="app-container" style={{ backgroundColor: currentEra?.color || 'var(--background)' }}>
-      {started && <ArtifactBackpack artifacts={artifacts} />}
-      
+    <div className="app-container" style={{ backgroundColor: bgColor, transition: 'background-color 0.5s ease' }}>
       <main className="main-content">
-        {!started && <Dashboard onStart={handleStart} />}
-        
-        {started && viewState === 'lesson' && (
-          <Lesson era={currentEra} onContinue={() => setViewState('quiz')} />
+        {viewState === 'menu' && (
+          <Dashboard
+            onGoToMap={() => setViewState('map')}
+            onGoToBackpack={() => setViewState('backpack')}
+            artifactsCount={artifacts.length}
+          />
         )}
-        
-        {started && viewState === 'quiz' && (
-          <Quiz era={currentEra} onWin={() => handleQuizWin(currentEra.artifact)} />
+
+        {viewState === 'backpack' && (
+          <ArtifactBackpack
+            artifacts={artifacts}
+            onHome={() => setViewState('menu')}
+          />
         )}
-        
-        {started && viewState === 'reward' && (
+
+        {viewState === 'map' && (
+          <Timeline
+            eras={eras}
+            currentEraIndex={currentEraIndex}
+            unlockedEras={unlockedEras}
+            onEraClick={handleTimelineClick}
+            onHome={() => setViewState('menu')}
+          />
+        )}
+
+        {viewState === 'lesson' && (
+          <Lesson
+            era={currentEra}
+            onContinue={() => setViewState('quiz')}
+            onHome={() => setViewState('menu')}
+          />
+        )}
+
+        {viewState === 'quiz' && (
+          <Quiz
+            era={currentEra}
+            onWin={() => handleQuizWin(currentEra.artifact)}
+            onHome={() => setViewState('menu')}
+          />
+        )}
+
+        {viewState === 'reward' && (
           <div className="reward-screen animate-pop" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)' }}>
             <h2 style={{ fontSize: '3rem', color: 'var(--text-dark)' }}>
               🎉 You Found The {currentEra.artifact.name}! 🎉
@@ -71,20 +98,20 @@ export default function App() {
               {currentEra.artifact.icon}
             </div>
             {currentEraIndex < eras.length - 1 ? (
-              <button className="start-btn" onClick={handleNextEra}>Warp To Next Era!</button>
+              <button className="start-btn" onClick={handleNextEra}>Back to Map!</button>
             ) : (
               <button className="start-btn" onClick={handleNextEra}>Finish Mission!</button>
             )}
           </div>
         )}
 
-        {started && viewState === 'end' && (
+        {viewState === 'end' && (
           <div className="reward-screen animate-pop" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)', maxWidth: '800px' }}>
             <h1 style={{ fontSize: '4rem', color: 'var(--primary)' }}>Mission Complete!</h1>
             <p style={{ fontSize: '2rem' }}>You collected all 10 artifacts and safely returned home.</p>
-            <div className="artifacts-grid" style={{ marginTop: '20px', gap: '20px', justifyContent: 'center' }}>
+            <div className="artifacts-grid" style={{ marginTop: '20px', gap: '20px', justifyContent: 'center', display: 'flex', flexWrap: 'wrap' }}>
               {artifacts.map(a => (
-                <div key={a.id} className="artifact-item animate-pop" style={{ width: '80px', height: '80px', fontSize: '3rem' }}>
+                <div key={a.id} className="artifact-item animate-pop" style={{ width: '80px', height: '80px', fontSize: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--background)', borderRadius: '50%' }}>
                   {a.icon}
                 </div>
               ))}
@@ -93,15 +120,6 @@ export default function App() {
           </div>
         )}
       </main>
-
-      {started && viewState !== 'end' && (
-        <Timeline 
-          eras={eras} 
-          currentEraIndex={currentEraIndex} 
-          unlockedEras={unlockedEras} 
-          onEraClick={handleTimelineClick} 
-        />
-      )}
     </div>
   );
 }

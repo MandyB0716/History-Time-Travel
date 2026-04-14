@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Lesson.css';
 
-export default function Lesson({ era, onContinue }) {
+export default function Lesson({ era, onContinue, onHome }) {
   const [lessonIndex, setLessonIndex] = useState(0);
 
   useEffect(() => {
@@ -19,7 +19,8 @@ export default function Lesson({ era, onContinue }) {
   const currentLesson = era.lessons[lessonIndex];
 
   return (
-    <div className="lesson-container animate-pop">
+    <div className="lesson-container animate-pop" style={{ position: 'relative' }}>
+      <button onClick={onHome} style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>🏠</button>
       <h1>{era.title}</h1>
 
       <div className="lesson-content">
