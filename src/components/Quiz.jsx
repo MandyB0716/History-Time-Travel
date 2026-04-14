@@ -17,7 +17,9 @@ export default function Quiz({ era, onWin, onHome }) {
 
   return (
     <div className="quiz-container animate-pop" style={{ position: 'relative' }}>
-      <button onClick={onHome} style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>🏠</button>
+      <button onClick={onHome} aria-label="Return to Main Menu" style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>
+        <span aria-hidden="true">🏠</span>
+      </button>
       <h2>{era.quiz.question}</h2>
       <div className="options-grid">
         {era.quiz.options.map(option => (
@@ -25,8 +27,9 @@ export default function Quiz({ era, onWin, onHome }) {
             key={option.id}
             className={`quiz-option ${bouncingId === option.id ? 'animate-shake' : ''}`}
             onClick={() => handleOptionClick(option)}
+            aria-label={option.label || option.id}
           >
-            <span className="option-image">{option.image}</span>
+            <span className="option-image" aria-hidden="true">{option.image}</span>
           </button>
         ))}
       </div>

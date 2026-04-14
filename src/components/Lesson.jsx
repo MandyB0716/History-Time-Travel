@@ -20,12 +20,14 @@ export default function Lesson({ era, onContinue, onHome }) {
 
   return (
     <div className="lesson-container animate-pop" style={{ position: 'relative' }}>
-      <button onClick={onHome} style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>🏠</button>
+      <button onClick={onHome} aria-label="Return to Main Menu" style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '2.5rem', cursor: 'pointer' }}>
+        <span aria-hidden="true">🏠</span>
+      </button>
       <h1>{era.title}</h1>
 
       <div className="lesson-content">
         <h2>Part {lessonIndex + 1}: {currentLesson.subtitle}</h2>
-        {currentLesson.image && <div className="lesson-image">{currentLesson.image}</div>}
+        {currentLesson.image && <div className="lesson-image" aria-hidden="true">{currentLesson.image}</div>}
         <p>{currentLesson.text}</p>
       </div>
 

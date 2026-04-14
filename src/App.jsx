@@ -90,11 +90,11 @@ export default function App() {
         )}
 
         {viewState === 'reward' && (
-          <div className="reward-screen animate-pop" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)' }}>
+          <div className="reward-screen animate-pop" aria-live="polite" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)' }}>
             <h2 style={{ fontSize: '3rem', color: 'var(--text-dark)' }}>
               🎉 You Found The {currentEra.artifact.name}! 🎉
             </h2>
-            <div className="animate-float" style={{ fontSize: '8rem', margin: '20px' }}>
+            <div className="animate-float" aria-hidden="true" style={{ fontSize: '8rem', margin: '20px' }}>
               {currentEra.artifact.icon}
             </div>
             {currentEraIndex < eras.length - 1 ? (
@@ -106,13 +106,13 @@ export default function App() {
         )}
 
         {viewState === 'end' && (
-          <div className="reward-screen animate-pop" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)', maxWidth: '800px' }}>
+          <div className="reward-screen animate-pop" aria-live="polite" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)', maxWidth: '800px' }}>
             <h1 style={{ fontSize: '4rem', color: 'var(--primary)' }}>Mission Complete!</h1>
             <p style={{ fontSize: '2rem' }}>You collected all 10 artifacts and safely returned home.</p>
             <div className="artifacts-grid" style={{ marginTop: '20px', gap: '20px', justifyContent: 'center', display: 'flex', flexWrap: 'wrap' }}>
               {artifacts.map(a => (
-                <div key={a.id} className="artifact-item animate-pop" style={{ width: '80px', height: '80px', fontSize: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--background)', borderRadius: '50%' }}>
-                  {a.icon}
+                <div key={a.id} className="artifact-item animate-pop" aria-label={a.name} style={{ width: '80px', height: '80px', fontSize: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--background)', borderRadius: '50%' }}>
+                  <span aria-hidden="true">{a.icon}</span>
                 </div>
               ))}
             </div>

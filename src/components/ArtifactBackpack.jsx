@@ -6,8 +6,10 @@ export default function ArtifactBackpack({ artifacts, onHome }) {
     <div className="reward-screen animate-pop" style={{ textAlign: 'center', background: 'var(--card-bg)', padding: '40px', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)', maxWidth: '800px', width: '100%' }}>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '3rem', color: 'var(--primary)' }}>🎒 Your Artifacts</h1>
-        <button onClick={onHome} style={{ background: 'none', border: 'none', fontSize: '3rem', cursor: 'pointer', transition: 'transform 0.2s' }}>🏠</button>
+        <h1 style={{ fontSize: '3rem', color: 'var(--primary)' }}><span aria-hidden="true">🎒</span> Your Artifacts</h1>
+        <button onClick={onHome} aria-label="Return to Main Menu" style={{ background: 'none', border: 'none', fontSize: '3rem', cursor: 'pointer', transition: 'transform 0.2s' }}>
+          <span aria-hidden="true">🏠</span>
+        </button>
       </div>
 
       <h2 style={{ fontSize: '1.8rem', color: 'var(--text-dark)', marginBottom: '30px' }}>Collected: {artifacts.length}/10</h2>

@@ -10,10 +10,15 @@ export default function Timeline({ eras, currentEraIndex, unlockedEras, onEraCli
       </div>
 
       <div className="timeline-container" style={{ position: 'relative', background: 'none', padding: 0 }}>
-        <div className="timeline-line"></div>
+        <div className="timeline-line" aria-hidden="true"></div>
         {eras.map((era, index) => {
           const isUnlocked = unlockedEras.includes(index);
           const isActive = index === currentEraIndex;
+          
+          let buttonLabel = era.title;
+          if (!isUnlocked) buttonLabel += ' (Locked)';
+          if (isActive) buttonLabel += ' (Current Location)';
+
           return (
             <button
               key={era.id}
@@ -21,8 +26,11 @@ export default function Timeline({ eras, currentEraIndex, unlockedEras, onEraCli
               onClick={() => onEraClick(index)}
               disabled={!isUnlocked}
               title={era.title}
+              aria-label={buttonLabel}
             >
-              {isUnlocked ? Array.from(era.title)[0] : '🔒'}
+              <span aria-hidden="true">
+                {isUnlocked ? Array.from(era.title)[0] : '🔒'}
+              </span>
             </button>
           );
         })}

@@ -68,14 +68,16 @@
   }
 }
 
-.animate-pop {
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-pop {
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
 
-.animate-shake {
-  animation: shake 0.4s ease-in-out;
-}
+  .animate-shake {
+    animation: shake 0.4s ease-in-out;
+  }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
 }

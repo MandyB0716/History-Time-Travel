@@ -7,11 +7,11 @@ export default function Dashboard({ onGoToMap, onGoToBackpack, artifactsCount })
       <h1>🚀 Time Machine Adventure! 🦕</h1>
       <p>Are you ready to travel through time and collect historical artifacts?</p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
-        <button className="start-btn animate-float" onClick={onGoToMap}>
-          🗺️ Lessons Map
+        <button className="start-btn animate-float" onClick={onGoToMap} aria-label="Open Lessons Map">
+          <span aria-hidden="true">🗺️</span> Lessons Map
         </button>
-        <button className="start-btn" onClick={onGoToBackpack}>
-          🎒 Backpack ({artifactsCount}/10)
+        <button className="start-btn" onClick={onGoToBackpack} aria-label={`Open your backpack. You carry ${artifactsCount} out of 10 artifacts`}>
+          <span aria-hidden="true">🎒</span> Backpack ({artifactsCount}/10)
         </button>
       </div>
     </div>
