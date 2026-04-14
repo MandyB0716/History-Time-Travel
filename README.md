@@ -7,6 +7,7 @@ The core objective is to teach early learners about different historical eras th
 
 ## ✨ Features
 * **10 Interactive Historical Eras:** Users navigate through different periods in history. Each era is broken down into structured lessons and an interactive quiz to reinforce learning.
+* **Universal Accessibility & Multi-Modal Feedback:** Engineered with inclusive design principles. Features integrated text-to-speech (TTS) narration via a clickable UI speaker icon to assist non-readers, alongside full keyboard navigation support (Tab/Enter) to accommodate varying levels of fine motor control.
 * **Targeted HCI Focus:** Implements age-appropriate storytelling, immersive feedback, and intuitive chronological navigation designed for early childhood cognitive development.
 * **Responsive Layout:** A clean, attractive graphical user interface (GUI) optimized for various screen sizes, utilizing friendly animations to encourage positive learning experiences.
 * **Real-time Feedback:** Provides instant, constructive feedback after quizzes to maintain engagement and prevent negative feelings during the learning process.
