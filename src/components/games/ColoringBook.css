@@ -37,7 +37,7 @@
   gap: 10px;
   margin-bottom: 16px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
 }
 
 .scene-btn {
@@ -65,9 +65,13 @@
   align-items: flex-start;
 }
 
-.canvas-wrapper {
+/* Layered Canvas Box */
+.layered-canvas-box {
   flex: 1;
-  background: white;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 600 / 400;
+  background: #ffffff;
   border: 3px solid #cbd5e1;
   border-radius: 16px;
   overflow: hidden;
@@ -77,13 +81,30 @@
   align-items: center;
 }
 
-.drawing-canvas {
+.paint-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  max-height: 400px;
+  height: 100%;
+  z-index: 10;
   cursor: crosshair;
   touch-action: none;
-  display: block;
+  background: #ffffff;
+}
+
+.template-overlay-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 20;
+  mix-blend-mode: multiply;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .tools-sidebar {
