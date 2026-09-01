@@ -7,29 +7,151 @@
   overflow-y: auto;
 }
 
+.era-top-nav {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 8px 16px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.nav-icon-btn {
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+  font-size: 1.15rem;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s;
+  color: var(--text-dark);
+}
+
+.nav-icon-btn:hover {
+  background: #e2e8f0;
+  transform: scale(1.05);
+}
+
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 60px 16px 30px 16px;
   position: relative;
   z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.reward-screen {
+  background: var(--card-bg);
+  padding: 36px 40px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 680px;
+  width: 100%;
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.reward-heading {
+  font-size: 2.4rem;
+  color: #b45309;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.reward-icon-floating {
+  font-size: 6.5rem;
+  margin: 16px 0;
+  line-height: 1;
+}
+
+.reward-description {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.mission-complete-card {
+  max-width: 780px;
+}
+
+.mission-title {
+  font-size: 2.8rem;
+  color: #d97706;
+  margin-bottom: 10px;
+}
+
+.mission-subtitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+}
+
+.mission-artifacts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0 30px 0;
+}
+
+.end-artifact-badge {
+  width: 68px;
+  height: 68px;
+  font-size: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 2px solid #22c55e;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.end-artifact-name {
+  display: none;
+}
+
+.end-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 /* Animations */
 @keyframes popIn {
   0% {
-    transform: scale(0.5);
+    transform: scale(0.65);
     opacity: 0;
   }
-
   80% {
-    transform: scale(1.05);
+    transform: scale(1.03);
     opacity: 1;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
@@ -37,40 +159,29 @@
 }
 
 @keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-10px);
-  }
-
-  50% {
-    transform: translateX(10px);
-  }
-
-  75% {
-    transform: translateX(-10px);
-  }
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
 }
 
 @keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 
-  0%,
-  100% {
-    transform: translateY(0);
-  }
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 6px 0 #b91c1c, var(--shadow-md); }
+  50% { transform: scale(1.03); box-shadow: 0 8px 18px rgba(220, 38, 38, 0.45); }
+}
 
-  50% {
-    transform: translateY(-10px);
-  }
+@keyframes speakPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  50% { transform: scale(1.12); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .animate-pop {
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
 
   .animate-shake {
@@ -78,6 +189,41 @@
   }
 
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 2.8s ease-in-out infinite;
+  }
+
+  .pulse-subtle {
+    animation: pulseGlow 2.5s infinite;
+  }
+
+  .pulse-anim {
+    animation: speakPulse 1.2s infinite;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding: 55px 12px 20px 12px;
+  }
+  .reward-screen {
+    padding: 24px 16px;
+  }
+  .reward-heading {
+    font-size: 1.8rem;
+  }
+  .reward-icon-floating {
+    font-size: 4.5rem;
+  }
+  .reward-description {
+    font-size: 1.15rem;
+  }
+  .era-top-nav {
+    top: 8px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .nav-icon-btn {
+    font-size: 1rem;
+    padding: 4px 8px;
   }
 }
