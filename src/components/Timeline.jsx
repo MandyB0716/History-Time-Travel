@@ -6,10 +6,10 @@ import { stopSpeech } from '../utils/speech';
 const eraIcons = {
   'dinosaurs': '🦖',
   'ice-age': '🦣',
-  'egypt': '🏜️',
+  'egypt': '🛕',
   'greece': '🏛️',
   'rome': '🏟️',
-  'maya': '🛕',
+  'maya': '🌴',
   'middle-ages': '🏰',
   'japan': '🏯',
   'pirates': '🏴‍☠️',

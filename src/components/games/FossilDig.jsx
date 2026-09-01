@@ -16,10 +16,8 @@ const RELICS_POOL = [
 
 function generateDigSite() {
   const size = 12; // 3x4 grid
-  // Pick 4 random relics
   const shuffledRelics = [...RELICS_POOL].sort(() => 0.5 - Math.random()).slice(0, 4);
   
-  // Pick 4 random distinct tile positions
   const positions = new Set();
   while (positions.size < 4) {
     positions.add(Math.floor(Math.random() * size));
@@ -30,7 +28,7 @@ function generateDigSite() {
     const relicIndex = posArray.indexOf(index);
     return {
       id: index,
-      layers: 2, // 2 = deep dirt, 1 = loose sand, 0 = revealed
+      layers: 2, // 2 = deep rock/dirt, 1 = loose sand, 0 = revealed
       relic: relicIndex !== -1 ? shuffledRelics[relicIndex] : null
     };
   });
@@ -42,12 +40,28 @@ export default function FossilDig({ onBack }) {
   const [gameState, setGameState] = useState(() => generateDigSite());
   const [foundRelics, setFoundRelics] = useState([]);
   const [selectedTool, setSelectedTool] = useState('brush'); // 'brush' or 'pickaxe'
+  const [activeAction, setActiveAction] = useState(null); // { tileId, tool, particles }
 
   const handleTileClick = (tileIndex) => {
     const tile = gameState.tiles[tileIndex];
-    if (tile.layers === 0) return; // Already revealed
+    if (tile.layers === 0) return;
 
     playClickSound();
+
+    // Spawn tool and dust particles over the clicked tile
+    const particles = selectedTool === 'brush' 
+      ? ['💨', '✨', '⏳', '💨'] 
+      : ['💥', '🪨', '⚡', '✨'];
+
+    setActiveAction({
+      tileId: tileIndex,
+      tool: selectedTool,
+      particles
+    });
+
+    setTimeout(() => {
+      setActiveAction(null);
+    }, 600);
 
     const newLayers = tile.layers - 1;
     const updatedTiles = gameState.tiles.map((t, idx) => 
@@ -57,7 +71,6 @@ export default function FossilDig({ onBack }) {
     setGameState(prev => ({ ...prev, tiles: updatedTiles }));
 
     if (newLayers === 0 && tile.relic) {
-      // Uncovered a relic!
       const newFound = [...foundRelics, tile.relic];
       setFoundRelics(newFound);
       
@@ -66,7 +79,7 @@ export default function FossilDig({ onBack }) {
         speakText(`Incredible! You excavated all ${gameState.totalRelics} historical treasures!`);
       } else {
         playCorrectSound();
-        speakText(`You found a ${tile.relic.name}!`);
+        speakText(`You uncovered a ${tile.relic.name}!`);
       }
     }
   };
@@ -76,6 +89,7 @@ export default function FossilDig({ onBack }) {
     stopSpeech();
     setGameState(generateDigSite());
     setFoundRelics([]);
+    setActiveAction(null);
   };
 
   const handleBack = () => {
@@ -91,7 +105,7 @@ export default function FossilDig({ onBack }) {
       <div className="dig-header">
         <div>
           <h1 className="dig-title">🏺 Archaeology Fossil Dig</h1>
-          <p className="dig-subtitle">Tap the dirt to brush and dig up hidden fossils!</p>
+          <p className="dig-subtitle">Choose a tool and tap the earth to sweep away sand and crack rocks!</p>
         </div>
         <button
           onClick={handleBack}
@@ -111,7 +125,7 @@ export default function FossilDig({ onBack }) {
             aria-checked={selectedTool === 'brush'}
             role="radio"
           >
-            <span aria-hidden="true">🖌️</span> Soft Brush
+            <span className="tool-btn-icon" aria-hidden="true">🖌️</span> Soft Brush
           </button>
           <button
             className={`tool-btn ${selectedTool === 'pickaxe' ? 'active-tool' : ''}`}
@@ -119,7 +133,7 @@ export default function FossilDig({ onBack }) {
             aria-checked={selectedTool === 'pickaxe'}
             role="radio"
           >
-            <span aria-hidden="true">⛏️</span> Archaeologist Pick
+            <span className="tool-btn-icon" aria-hidden="true">⛏️</span> Archaeologist Pick
           </button>
         </div>
 
@@ -131,7 +145,7 @@ export default function FossilDig({ onBack }) {
       <div className="dig-site-grid" role="grid" aria-label="Archaeology dig site">
         {gameState.tiles.map((tile) => {
           let layerClass = 'layer-deep';
-          let layerLabel = 'Deep Soil (Tap to dig)';
+          let layerLabel = 'Deep Rock & Soil (Tap to crack)';
           let tileIcon = '🪨';
 
           if (tile.layers === 1) {
@@ -144,19 +158,42 @@ export default function FossilDig({ onBack }) {
             tileIcon = tile.relic ? tile.relic.icon : '✨';
           }
 
+          const isActionOnTile = activeAction && activeAction.tileId === tile.id;
+
           return (
-            <button
-              key={tile.id}
-              className={`dig-tile ${layerClass} ${tile.layers === 0 && tile.relic ? 'relic-sparkle animate-pop' : ''}`}
-              onClick={() => handleTileClick(tile.id)}
-              aria-label={layerLabel}
-              disabled={tile.layers === 0}
-            >
-              <span className="tile-content-icon" aria-hidden="true">{tileIcon}</span>
-              {tile.layers === 0 && tile.relic && (
-                <span className="tile-relic-name">{tile.relic.name}</span>
+            <div key={tile.id} className="dig-tile-wrapper">
+              <button
+                className={`dig-tile ${layerClass} ${tile.layers === 0 && tile.relic ? 'relic-sparkle animate-pop' : ''}`}
+                onClick={() => handleTileClick(tile.id)}
+                aria-label={layerLabel}
+                disabled={tile.layers === 0}
+              >
+                <span className="tile-content-icon" aria-hidden="true">{tileIcon}</span>
+                {tile.layers === 0 && tile.relic && (
+                  <span className="tile-relic-name">{tile.relic.name}</span>
+                )}
+                {tile.layers === 2 && (
+                  <span className="layer-depth-hint">Rock Layer</span>
+                )}
+                {tile.layers === 1 && (
+                  <span className="layer-depth-hint sand-hint">Sand Layer</span>
+                )}
+              </button>
+
+              {/* Active Animated Tool & Flying Dust Particles */}
+              {isActionOnTile && (
+                <div className="tool-animation-overlay" aria-hidden="true">
+                  <div className={`animated-tool-icon ${activeAction.tool === 'brush' ? 'tool-brush-sweep' : 'tool-pick-strike'}`}>
+                    {activeAction.tool === 'brush' ? '🖌️' : '⛏️'}
+                  </div>
+                  <div className="particles-burst">
+                    {activeAction.particles.map((p, pIdx) => (
+                      <span key={pIdx} className={`flying-particle particle-${pIdx}`}>{p}</span>
+                    ))}
+                  </div>
+                </div>
               )}
-            </button>
+            </div>
           );
         })}
       </div>

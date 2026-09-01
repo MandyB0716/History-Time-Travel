@@ -1,9 +1,9 @@
 .fossil-dig-page {
   background: var(--card-bg);
-  padding: 26px 34px;
+  padding: 24px 32px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  max-width: 820px;
+  max-width: 840px;
   width: 100%;
   box-sizing: border-box;
   border: 4px solid rgba(255, 255, 255, 0.85);
@@ -14,7 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .dig-title {
@@ -37,34 +37,40 @@
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
 .tool-selector {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .tool-btn {
   background: white;
-  border: 2px solid #cbd5e1;
-  font-size: 1.05rem;
+  border: 3px solid #cbd5e1;
+  font-size: 1.1rem;
   font-weight: 800;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: 24px;
   cursor: pointer;
   transition: all 0.15s;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tool-btn-icon {
+  font-size: 1.4rem;
 }
 
 .tool-btn.active-tool {
   background: #fef3c7;
-  border-color: #f59e0b;
-  color: #92400e;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+  border-color: #d97706;
+  color: #78350f;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
 }
 
 .dig-counter-badge {
@@ -81,15 +87,22 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
-  background: #78350f; /* Rich earth background */
+  background: #78350f;
   padding: 18px;
-  border-radius: 18px;
+  border-radius: 20px;
   border: 4px solid #451a03;
-  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+
+.dig-tile-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 }
 
 .dig-tile {
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
@@ -98,17 +111,19 @@
   border: 3px solid;
   cursor: pointer;
   transition: transform 0.15s, filter 0.15s, box-shadow 0.15s;
-  padding: 6px;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
 }
 
 .dig-tile.layer-deep {
-  background: #a16207;
-  border-color: #713f12;
-  box-shadow: 0 4px 0 #451a03;
+  background: linear-gradient(135deg, #a16207 0%, #713f12 100%);
+  border-color: #451a03;
+  box-shadow: 0 4px 0 #451a03, inset 0 2px 4px rgba(255, 255, 255, 0.15);
 }
 
 .dig-tile.layer-deep:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   filter: brightness(1.1);
 }
 
@@ -118,31 +133,31 @@
 }
 
 .dig-tile.layer-sand {
-  background: #fbbf24;
-  border-color: #d97706;
-  box-shadow: 0 4px 0 #92400e;
+  background: linear-gradient(135deg, #fde047 0%, #d97706 100%);
+  border-color: #92400e;
+  box-shadow: 0 4px 0 #78350f, inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .dig-tile.layer-sand:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   filter: brightness(1.1);
 }
 
 .dig-tile.layer-cleared {
-  background: #fef08a;
-  border-color: #eab308;
+  background: #fef9c3;
+  border-color: #ca8a04;
   cursor: default;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .dig-tile.relic-sparkle {
   background: #dbeafe;
-  border-color: #3b82f6;
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+  border-color: #2563eb;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.7);
 }
 
 .tile-content-icon {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   line-height: 1;
 }
 
@@ -150,31 +165,128 @@
   font-size: 0.75rem;
   font-weight: 900;
   color: #1e3a8a;
-  margin-top: 4px;
+  margin-top: 2px;
   text-align: center;
   line-height: 1.1;
 }
 
+.layer-depth-hint {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #fef08a;
+  text-transform: uppercase;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+.layer-depth-hint.sand-hint {
+  color: #451a03;
+}
+
+/* Tool Sweep & Pick Animations */
+.tool-animation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animated-tool-icon {
+  font-size: 3.5rem;
+  position: absolute;
+  z-index: 52;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+}
+
+@keyframes brushSweep {
+  0% { transform: translate(-30px, -20px) rotate(-30deg); opacity: 0; }
+  30% { transform: translate(0px, 0px) rotate(15deg); opacity: 1; }
+  70% { transform: translate(25px, -10px) rotate(-20deg); opacity: 1; }
+  100% { transform: translate(40px, -30px) rotate(30deg); opacity: 0; }
+}
+
+@keyframes pickStrike {
+  0% { transform: translate(20px, -40px) rotate(45deg); opacity: 0; }
+  40% { transform: translate(0px, 5px) rotate(-15deg); opacity: 1; }
+  70% { transform: translate(5px, 0px) rotate(0deg); opacity: 1; }
+  100% { transform: translate(15px, -20px) rotate(30deg); opacity: 0; }
+}
+
+.tool-brush-sweep {
+  animation: brushSweep 0.55s ease-out forwards;
+}
+
+.tool-pick-strike {
+  animation: pickStrike 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Flying Dust & Debris Particles */
+.particles-burst {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 51;
+}
+
+.flying-particle {
+  position: absolute;
+  font-size: 1.8rem;
+}
+
+@keyframes particleFlyTopLeft {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(-35px, -35px) scale(1.3); opacity: 0; }
+}
+
+@keyframes particleFlyTopRight {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(35px, -35px) scale(1.3); opacity: 0; }
+}
+
+@keyframes particleFlyBottomLeft {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(-35px, 35px) scale(1.3); opacity: 0; }
+}
+
+@keyframes particleFlyBottomRight {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(35px, 35px) scale(1.3); opacity: 0; }
+}
+
+.particle-0 { animation: particleFlyTopLeft 0.55s ease-out forwards; }
+.particle-1 { animation: particleFlyTopRight 0.55s ease-out forwards; }
+.particle-2 { animation: particleFlyBottomLeft 0.55s ease-out forwards; }
+.particle-3 { animation: particleFlyBottomRight 0.55s ease-out forwards; }
+
 .dig-complete-banner {
-  margin-top: 20px;
+  margin-top: 18px;
   background: #fef3c7;
   border: 3px solid #f59e0b;
   border-radius: 16px;
-  padding: 20px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .dig-complete-banner h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #92400e;
   margin: 0;
 }
 
 .dig-complete-banner p {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #78350f;
   margin: 0;
@@ -183,15 +295,15 @@
 .dig-actions-footer {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 14px;
 }
 
 @media (max-width: 600px) {
   .fossil-dig-page {
-    padding: 18px 12px;
+    padding: 16px 10px;
   }
   .dig-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   .dig-site-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -199,6 +311,6 @@
     padding: 10px;
   }
   .tile-content-icon {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 }

@@ -44,13 +44,13 @@ export const eras = [
     lessons: [
       { subtitle: 'The Nile River', text: 'Ancient Egypt was a kingdom built along the very long Nile River.', image: '🌊' },
       { subtitle: 'Pharaohs', text: 'The kings and queens were called Pharaohs, and they wore beautiful gold crowns.', image: '🫅' },
-      { subtitle: 'The Pyramids', text: 'They built massive stone Pyramids as tombs for the Pharaohs.', image: '🏜️' }
+      { subtitle: 'The Pyramids', text: 'They built massive stone Pyramids as tombs for the Pharaohs.', image: '🛕' }
     ],
     artifact: { id: 'crown', name: "Pharaoh's Crown", icon: '👑' },
     quiz: {
-      question: 'Find the Pyramid!',
+      question: "Find the Pharaoh's Pyramid!",
       options: [
-        { id: 'pyramid', label: 'Pyramid', image: '🏜️', isCorrect: true },
+        { id: 'pyramid', label: 'Pyramid', image: '🛕', isCorrect: true },
         { id: 'house', label: 'House', image: '🏠', isCorrect: false },
         { id: 'tent', label: 'Tent', image: '⛺', isCorrect: false }
       ]
