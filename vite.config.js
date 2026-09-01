@@ -4,6 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/CS630_Final_Project/',
+  base: '/History-Time-Travel/',
 })
-

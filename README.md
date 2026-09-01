@@ -9,7 +9,7 @@
 > Master of Science in Applied Computer Science &bull; Southeast Missouri State University  
 > **Course:** CS630 - Human-Computer Interaction  
 > **Author:** Mandy Brown  
-> **Live Demo:** [https://mandyb0716.github.io/CS630_Final_Project/](https://mandyb0716.github.io/CS630_Final_Project/)
+> **Live Demo:** [https://mandyb0716.github.io/History-Time-Travel/](https://mandyb0716.github.io/History-Time-Travel/)
 
 ---
 
@@ -120,7 +120,7 @@ Final_Project_Code/
    ```bash
    npm run dev
    ```
-   Open `http://localhost:5173/CS630_Final_Project/` in your browser.
+   Open `http://localhost:5173/History-Time-Travel/` in your browser.
 
 4. **Run code validation & build:**
    ```bash
