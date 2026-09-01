@@ -59,7 +59,7 @@ export const eras = [
   {
     id: 'greece',
     title: 'Ancient Greece',
-    color: '#e2e8f0',
+    color: '#bae6fd',
     lessons: [
       { subtitle: 'City-States', text: 'Ancient Greece had many famous cities like Athens and Sparta.', image: '🏛️' },
       { subtitle: 'The Olympics', text: 'They invented the Olympic Games, where athletes ran and wrestled.', image: '🏃' },
@@ -72,6 +72,44 @@ export const eras = [
         { id: 'temple', label: 'Temple', image: '🏛️', isCorrect: true },
         { id: 'factory', label: 'Factory', image: '🏭', isCorrect: false },
         { id: 'hospital', label: 'Hospital', image: '🏥', isCorrect: false }
+      ]
+    }
+  },
+  {
+    id: 'rome',
+    title: 'Ancient Rome',
+    color: '#fca5a5',
+    lessons: [
+      { subtitle: 'Mighty Republic', text: 'Ancient Rome was a great empire with paved stone roads connecting cities.', image: '🏛️' },
+      { subtitle: 'The Colosseum', text: 'Romans watched chariot races and exciting games in a giant stadium called the Colosseum!', image: '🏟️' },
+      { subtitle: 'Brave Soldiers', text: 'Roman soldiers carried curved shields and wore shiny helmets with red crests.', image: '🛡️' }
+    ],
+    artifact: { id: 'roman-coin', name: 'Roman Gold Coin', icon: '🪙' },
+    quiz: {
+      question: 'Find the Colosseum Stadium!',
+      options: [
+        { id: 'colosseum', label: 'Colosseum', image: '🏟️', isCorrect: true },
+        { id: 'igloo', label: 'Igloo', image: '🛖', isCorrect: false },
+        { id: 'windmill', label: 'Windmill', image: '🏬', isCorrect: false }
+      ]
+    }
+  },
+  {
+    id: 'maya',
+    title: 'Ancient Maya',
+    color: '#86efac',
+    lessons: [
+      { subtitle: 'Jungle Cities', text: 'The Maya built wonderful stone cities hidden deep inside tropical rainforests.', image: '🌴' },
+      { subtitle: 'Step Pyramids', text: 'They constructed tall step pyramids with stairs leading right up to the sky.', image: '🛕' },
+      { subtitle: 'Chocolate Trees', text: 'The Maya were among the first people to make yummy drinks from cocoa beans!', image: '🍫' }
+    ],
+    artifact: { id: 'jade-mask', name: 'Maya Jade Mask', icon: '🎭' },
+    quiz: {
+      question: 'Spot the Step Pyramid!',
+      options: [
+        { id: 'step-pyramid', label: 'Step Pyramid', image: '🛕', isCorrect: true },
+        { id: 'barn', label: 'Barn', image: '🚜', isCorrect: false },
+        { id: 'skyscraper', label: 'Skyscraper', image: '🏢', isCorrect: false }
       ]
     }
   },
@@ -95,6 +133,25 @@ export const eras = [
     }
   },
   {
+    id: 'japan',
+    title: 'Feudal Japan',
+    color: '#fed7aa',
+    lessons: [
+      { subtitle: 'Land of the Samurai', text: 'Samurai warriors followed a code of honor, courage, and respect.', image: '⚔️' },
+      { subtitle: 'Cherry Blossoms', text: 'People celebrated spring beneath beautiful blooming pink cherry blossom trees.', image: '🌸' },
+      { subtitle: 'Wooden Pagodas', text: 'They designed elegant wooden pagoda castles with curved roofs.', image: '🏯' }
+    ],
+    artifact: { id: 'origami-crane', name: 'Golden Origami Crane', icon: '🦢' },
+    quiz: {
+      question: 'Find the Japanese Pagoda Castle!',
+      options: [
+        { id: 'pagoda', label: 'Pagoda Castle', image: '🏯', isCorrect: true },
+        { id: 'lighthouse', label: 'Lighthouse', image: '🗼', isCorrect: false },
+        { id: 'bridge', label: 'Bridge', image: '🌉', isCorrect: false }
+      ]
+    }
+  },
+  {
     id: 'pirates',
     title: 'Pirate Age',
     color: '#38bdf8',
@@ -110,6 +167,25 @@ export const eras = [
         { id: 'box', label: 'Box', image: '📦', isCorrect: false },
         { id: 'barrel', label: 'Barrel', image: '🛢️', isCorrect: false },
         { id: 'treasure', label: 'Treasure', image: '🪙', isCorrect: true }
+      ]
+    }
+  },
+  {
+    id: 'renaissance',
+    title: 'Renaissance',
+    color: '#ddd6fe',
+    lessons: [
+      { subtitle: 'Great Inventions', text: 'Artists and scientists like Leonardo da Vinci designed flying machines!', image: '🎨' },
+      { subtitle: 'The Printing Press', text: 'New printing presses allowed books to be shared with everyone for the first time.', image: '📚' },
+      { subtitle: 'Looking at Stars', text: 'Astronomers used brass telescopes to look at moons and distant planets.', image: '🔭' }
+    ],
+    artifact: { id: 'telescope', name: 'Brass Telescope', icon: '🔭' },
+    quiz: {
+      question: 'Spot the Telescope!',
+      options: [
+        { id: 'telescope', label: 'Telescope', image: '🔭', isCorrect: true },
+        { id: 'flashlight', label: 'Flashlight', image: '🔦', isCorrect: false },
+        { id: 'candle', label: 'Candle', image: '🕯️', isCorrect: false }
       ]
     }
   },
@@ -152,6 +228,25 @@ export const eras = [
     }
   },
   {
+    id: 'aviation',
+    title: 'Early Aviation',
+    color: '#67e8f9',
+    lessons: [
+      { subtitle: 'First Flight', text: 'The Wright Brothers built the very first powered airplane in 1903!', image: '🛩️' },
+      { subtitle: 'Biplanes', text: 'Early airplanes had two wings stacked on top of each other and open cockpits.', image: '✈️' },
+      { subtitle: 'Daredevil Pilots', text: 'Brave pilots wore leather helmets and goggles to fly above the clouds.', image: '🥽' }
+    ],
+    artifact: { id: 'aviator-goggles', name: 'Aviator Goggles', icon: '🥽' },
+    quiz: {
+      question: 'Spot the Airplane!',
+      options: [
+        { id: 'airplane', label: 'Airplane', image: '🛩️', isCorrect: true },
+        { id: 'submarine', label: 'Submarine', image: '🚢', isCorrect: false },
+        { id: 'wagon', label: 'Wagon', image: '🛒', isCorrect: false }
+      ]
+    }
+  },
+  {
     id: 'retro',
     title: '1960s Retro',
     color: '#f472b6',
@@ -173,7 +268,7 @@ export const eras = [
   {
     id: 'space-age',
     title: 'Space Age',
-    color: '#1e1b4b',
+    color: '#312e81',
     lessons: [
       { subtitle: 'Leaving Earth', text: 'Scientists built powerful rockets to send astronauts into space.', image: '🚀' },
       { subtitle: 'Walking on the Moon', text: 'In 1969, humans walked on the moon for the very first time!', image: '🌕' },

@@ -1,0 +1,144 @@
+.activity-center-page {
+  background: var(--card-bg);
+  padding: 30px 36px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  max-width: 960px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.activity-title {
+  font-size: 2.3rem;
+  color: #d97706;
+  margin: 0;
+  text-align: left;
+}
+
+.activity-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  font-weight: 700;
+  margin: 4px 0 0 0;
+  text-align: left;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.game-card {
+  background: white;
+  border-radius: 20px;
+  border: 3px solid #cbd5e1;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.game-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.game-card.fossil-card {
+  border-color: #f59e0b;
+}
+
+.game-card.fossil-card:hover {
+  border-color: #d97706;
+  background: #fffbeb;
+}
+
+.game-card.memory-card {
+  border-color: #38bdf8;
+}
+
+.game-card.memory-card:hover {
+  border-color: #0284c7;
+  background: #f0f9ff;
+}
+
+.game-card.coloring-card {
+  border-color: #ec4899;
+}
+
+.game-card.coloring-card:hover {
+  border-color: #db2777;
+  background: #fdf2f8;
+}
+
+.game-card-icon {
+  font-size: 4.2rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.game-card-title {
+  font-size: 1.45rem;
+  color: #0f172a;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.game-card-desc {
+  font-size: 1.05rem;
+  color: #334155;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.game-play-btn {
+  background: #f59e0b;
+  color: white;
+  font-weight: 900;
+  font-size: 1.15rem;
+  padding: 10px 22px;
+  border-radius: 25px;
+  box-shadow: 0 4px 0 #b45309;
+}
+
+.fossil-card .game-play-btn {
+  background: #f59e0b;
+  box-shadow: 0 4px 0 #b45309;
+}
+
+.memory-card .game-play-btn {
+  background: #0284c7;
+  box-shadow: 0 4px 0 #0369a1;
+}
+
+.coloring-card .game-play-btn {
+  background: #db2777;
+  box-shadow: 0 4px 0 #be185d;
+}
+
+@media (max-width: 600px) {
+  .activity-center-page {
+    padding: 20px 15px;
+  }
+  .activity-title {
+    font-size: 1.7rem;
+  }
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}

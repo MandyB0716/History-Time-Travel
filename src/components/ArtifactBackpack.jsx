@@ -3,13 +3,19 @@ import './ArtifactBackpack.css';
 import { playClickSound } from '../utils/audio';
 import { stopSpeech } from '../utils/speech';
 
-export default function ArtifactBackpack({ eras, artifacts, onHome, onResetProgress }) {
+export default function ArtifactBackpack({ eras, artifacts, onHome, onResetProgress, onGoToCertificate }) {
   const [showConfirmReset, setShowConfirmReset] = useState(false);
 
   const handleHome = () => {
     playClickSound();
     stopSpeech();
     onHome();
+  };
+
+  const handleCertClick = () => {
+    playClickSound();
+    stopSpeech();
+    onGoToCertificate();
   };
 
   const handleResetClick = () => {
@@ -33,7 +39,7 @@ export default function ArtifactBackpack({ eras, artifacts, onHome, onResetProgr
       <div className="backpack-header">
         <div>
           <h1 className="backpack-title">🎒 Explorer's Backpack</h1>
-          <p className="backpack-subtitle">Collected: {artifacts.length} / {eras.length} Artifacts</p>
+          <p className="backpack-subtitle">Collected: {artifacts.length} / {eras.length} Historical Artifacts</p>
         </div>
         <button
           onClick={handleHome}
@@ -69,9 +75,13 @@ export default function ArtifactBackpack({ eras, artifacts, onHome, onResetProgr
       </div>
 
       <div className="backpack-footer">
+        <button className="start-btn cert-shortcut-btn" onClick={handleCertClick}>
+          📜 View & Print Diploma
+        </button>
+
         {!showConfirmReset ? (
           <button className="reset-adventure-btn" onClick={handleResetClick}>
-            🔄 Reset Adventure Progress
+            🔄 Reset Progress
           </button>
         ) : (
           <div className="reset-confirm-box animate-pop">

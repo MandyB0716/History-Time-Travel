@@ -3,9 +3,18 @@ import './Dashboard.css';
 import { speakText, stopSpeech } from '../utils/speech';
 import { playClickSound } from '../utils/audio';
 
-export default function Dashboard({ onGoToMap, onGoToBackpack, artifactsCount, isMuted, onToggleMute }) {
+export default function Dashboard({ 
+  onGoToMap, 
+  onGoToBackpack, 
+  onGoToActivities, 
+  onGoToCertificate, 
+  artifactsCount, 
+  totalErasCount = 15,
+  isMuted, 
+  onToggleMute 
+}) {
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const introText = "Are you ready to travel through time and collect historical artifacts?";
+  const introText = "Are you ready to travel through time, explore 15 historical eras, and collect artifacts?";
 
   const handleSpeak = () => {
     if (isSpeaking) {
@@ -20,16 +29,10 @@ export default function Dashboard({ onGoToMap, onGoToBackpack, artifactsCount, i
     );
   };
 
-  const handleMapClick = () => {
+  const handleAction = (callback) => {
     playClickSound();
     stopSpeech();
-    onGoToMap();
-  };
-
-  const handleBackpackClick = () => {
-    playClickSound();
-    stopSpeech();
-    onGoToBackpack();
+    callback();
   };
 
   return (
@@ -66,19 +69,38 @@ export default function Dashboard({ onGoToMap, onGoToBackpack, artifactsCount, i
       <div className="dashboard-actions">
         <button
           className="start-btn pulse-subtle"
-          onClick={handleMapClick}
+          onClick={() => handleAction(onGoToMap)}
           aria-label="Open Lessons Map"
         >
           <span className="btn-icon" aria-hidden="true">🗺️</span>
-          <span>Lessons Map</span>
+          <span>Lessons Map ({totalErasCount} Eras)</span>
         </button>
+
+        <button
+          className="start-btn activities-btn"
+          onClick={() => handleAction(onGoToActivities)}
+          aria-label="Open Activity Center"
+        >
+          <span className="btn-icon" aria-hidden="true">🎮</span>
+          <span>Activity Center</span>
+        </button>
+
         <button
           className="start-btn secondary-btn"
-          onClick={handleBackpackClick}
-          aria-label={`Open your backpack. You have collected ${artifactsCount} out of 10 artifacts`}
+          onClick={() => handleAction(onGoToBackpack)}
+          aria-label={`Open your backpack. You have collected ${artifactsCount} out of ${totalErasCount} artifacts`}
         >
           <span className="btn-icon" aria-hidden="true">🎒</span>
-          <span>Backpack ({artifactsCount}/10)</span>
+          <span>Backpack ({artifactsCount}/{totalErasCount})</span>
+        </button>
+
+        <button
+          className="start-btn cert-btn"
+          onClick={() => handleAction(onGoToCertificate)}
+          aria-label="View Explorer Diploma Certificate"
+        >
+          <span className="btn-icon" aria-hidden="true">📜</span>
+          <span>Explorer Diploma</span>
         </button>
       </div>
     </div>

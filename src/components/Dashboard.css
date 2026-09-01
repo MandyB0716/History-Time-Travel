@@ -5,21 +5,21 @@
   justify-content: center;
   text-align: center;
   background: var(--card-bg);
-  padding: 30px 40px;
+  padding: 28px 36px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  max-width: 680px;
+  max-width: 720px;
   width: 100%;
   margin: 0 auto;
   position: relative;
-  border: 4px solid rgba(255, 255, 255, 0.8);
+  border: 4px solid rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
 }
 
 .top-controls {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 14px;
+  right: 14px;
   display: flex;
   gap: 10px;
 }
@@ -27,9 +27,9 @@
 .icon-ctrl-btn {
   background: white;
   border: 2px solid var(--text-dark);
-  font-size: 1.5rem;
-  width: 44px;
-  height: 44px;
+  font-size: 1.4rem;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -48,10 +48,10 @@
 }
 
 .dashboard-title {
-  font-size: 2.8rem;
-  color: #d97706; /* Dark amber for high contrast on light cards */
-  margin-top: 10px;
-  margin-bottom: 20px;
+  font-size: 2.6rem;
+  color: #d97706;
+  margin-top: 8px;
+  margin-bottom: 16px;
   text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
@@ -62,23 +62,23 @@
 }
 
 .title-icon {
-  font-size: 2.6rem;
+  font-size: 2.4rem;
 }
 
 .intro-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 14px 24px;
+  gap: 14px;
+  margin-bottom: 22px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 12px 20px;
   border-radius: 16px;
   border: 2px solid #e2e8f0;
 }
 
 .intro-text {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--text-dark);
   margin: 0;
@@ -88,9 +88,9 @@
 .speak-btn {
   background: #fef08a;
   border: 2px solid #ca8a04;
-  font-size: 2rem;
-  width: 52px;
-  height: 52px;
+  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -111,73 +111,102 @@
 }
 
 .dashboard-actions {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
   width: 100%;
 }
 
 .start-btn {
   background: var(--accent);
   color: white;
-  font-size: 1.65rem;
+  font-size: 1.35rem;
   font-weight: 900;
-  padding: 16px 32px;
-  border-radius: 50px;
-  box-shadow: 0 6px 0 #b91c1c, var(--shadow-md);
+  padding: 14px 20px;
+  border-radius: 40px;
+  box-shadow: 0 5px 0 #b91c1c, var(--shadow-md);
   transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
+  text-align: center;
 }
 
 .start-btn:hover {
   filter: brightness(1.05);
   transform: translateY(-2px);
-  box-shadow: 0 8px 0 #b91c1c, var(--shadow-md);
+  box-shadow: 0 7px 0 #b91c1c, var(--shadow-md);
 }
 
 .start-btn:active {
-  transform: translateY(6px);
+  transform: translateY(5px);
   box-shadow: 0 0 0 #b91c1c, var(--shadow-sm);
+}
+
+.start-btn.activities-btn {
+  background: #059669;
+  box-shadow: 0 5px 0 #047857, var(--shadow-md);
+}
+
+.start-btn.activities-btn:hover {
+  box-shadow: 0 7px 0 #047857, var(--shadow-md);
+}
+
+.start-btn.activities-btn:active {
+  box-shadow: 0 0 0 #047857, var(--shadow-sm);
 }
 
 .start-btn.secondary-btn {
   background: #0284c7;
-  box-shadow: 0 6px 0 #0369a1, var(--shadow-md);
+  box-shadow: 0 5px 0 #0369a1, var(--shadow-md);
 }
 
 .start-btn.secondary-btn:hover {
-  box-shadow: 0 8px 0 #0369a1, var(--shadow-md);
+  box-shadow: 0 7px 0 #0369a1, var(--shadow-md);
 }
 
 .start-btn.secondary-btn:active {
   box-shadow: 0 0 0 #0369a1, var(--shadow-sm);
 }
 
+.start-btn.cert-btn {
+  background: #d97706;
+  box-shadow: 0 5px 0 #b45309, var(--shadow-md);
+}
+
+.start-btn.cert-btn:hover {
+  box-shadow: 0 7px 0 #b45309, var(--shadow-md);
+}
+
+.start-btn.cert-btn:active {
+  box-shadow: 0 0 0 #b45309, var(--shadow-sm);
+}
+
 .btn-icon {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 @media (max-width: 650px) {
   .dashboard {
-    padding: 24px 18px;
+    padding: 20px 14px;
   }
 
   .dashboard-title {
-    font-size: 2.1rem;
+    font-size: 2rem;
   }
 
   .intro-text {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+  }
+
+  .dashboard-actions {
+    grid-template-columns: 1fr;
   }
 
   .start-btn {
-    font-size: 1.35rem;
-    padding: 14px 24px;
-    width: 100%;
+    font-size: 1.25rem;
+    padding: 12px 18px;
   }
 }

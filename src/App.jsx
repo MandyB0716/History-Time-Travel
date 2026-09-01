@@ -4,6 +4,11 @@ import Timeline from './components/Timeline';
 import Lesson from './components/Lesson';
 import Quiz from './components/Quiz';
 import ArtifactBackpack from './components/ArtifactBackpack';
+import ActivityCenter from './components/games/ActivityCenter';
+import FossilDig from './components/games/FossilDig';
+import MemoryMatch from './components/games/MemoryMatch';
+import ColoringBook from './components/games/ColoringBook';
+import Certificate from './components/Certificate';
 import { eras } from './data/eras';
 import { playFanfareSound, playClickSound, setMuted, getMuted } from './utils/audio';
 import { stopSpeech } from './utils/speech';
@@ -34,7 +39,8 @@ export default function App() {
   });
 
   const [isMutedState, setIsMutedState] = useState(() => getMuted());
-  const [viewState, setViewState] = useState('menu'); // 'menu', 'map', 'backpack', 'lesson', 'quiz', 'reward', 'end'
+  const [viewState, setViewState] = useState('menu'); 
+  // 'menu', 'map', 'backpack', 'lesson', 'quiz', 'reward', 'end', 'activities', 'fossil-dig', 'memory-match', 'coloring-book', 'certificate'
 
   // Persist progress to localStorage
   useEffect(() => {
@@ -128,11 +134,19 @@ export default function App() {
           </button>
           <button
             className="nav-icon-btn"
-            onClick={() => { playClickSound(); stopSpeech(); setViewState('backpack'); }}
-            aria-label={`Backpack (${artifacts.length}/10)`}
-            title={`Backpack (${artifacts.length}/10)`}
+            onClick={() => { playClickSound(); stopSpeech(); setViewState('activities'); }}
+            aria-label="Activity Center"
+            title="Activity Center"
           >
-            <span aria-hidden="true">🎒 {artifacts.length}/10</span>
+            <span aria-hidden="true">🎮</span>
+          </button>
+          <button
+            className="nav-icon-btn"
+            onClick={() => { playClickSound(); stopSpeech(); setViewState('backpack'); }}
+            aria-label={`Backpack (${artifacts.length}/${eras.length})`}
+            title={`Backpack (${artifacts.length}/${eras.length})`}
+          >
+            <span aria-hidden="true">🎒 {artifacts.length}/{eras.length}</span>
           </button>
           <button
             className="nav-icon-btn"
@@ -150,9 +164,45 @@ export default function App() {
           <Dashboard
             onGoToMap={() => setViewState('map')}
             onGoToBackpack={() => setViewState('backpack')}
+            onGoToActivities={() => setViewState('activities')}
+            onGoToCertificate={() => setViewState('certificate')}
             artifactsCount={artifacts.length}
+            totalErasCount={eras.length}
             isMuted={isMutedState}
             onToggleMute={handleToggleMute}
+          />
+        )}
+
+        {viewState === 'activities' && (
+          <ActivityCenter
+            onSelectGame={(gameKey) => setViewState(gameKey)}
+            onHome={() => setViewState('menu')}
+          />
+        )}
+
+        {viewState === 'fossil-dig' && (
+          <FossilDig
+            onBack={() => setViewState('activities')}
+          />
+        )}
+
+        {viewState === 'memory-match' && (
+          <MemoryMatch
+            onBack={() => setViewState('activities')}
+          />
+        )}
+
+        {viewState === 'coloring-book' && (
+          <ColoringBook
+            onBack={() => setViewState('activities')}
+          />
+        )}
+
+        {viewState === 'certificate' && (
+          <Certificate
+            artifacts={artifacts}
+            totalErasCount={eras.length}
+            onBack={() => setViewState('menu')}
           />
         )}
 
@@ -162,6 +212,7 @@ export default function App() {
             artifacts={artifacts}
             onHome={() => setViewState('menu')}
             onResetProgress={handleResetProgress}
+            onGoToCertificate={() => setViewState('certificate')}
           />
         )}
 
@@ -202,18 +253,18 @@ export default function App() {
               {currentEra.artifact.icon}
             </div>
             <p className="reward-description">
-              Great job exploring {currentEra.title}! It has been safely stored in your backpack.
+              Great job exploring {currentEra.title}! It has been safely stored in your explorer backpack.
             </p>
             <button className="start-btn pulse-subtle" onClick={handleNextEra}>
-              {currentEraIndex < eras.length - 1 ? 'Continue to Next Era 🗺️' : 'Finish Mission! 🏆'}
+              {currentEraIndex < eras.length - 1 ? 'Continue to Next Era 🗺️' : 'Finish All Eras! 🏆'}
             </button>
           </div>
         )}
 
         {viewState === 'end' && (
           <div className="reward-screen animate-pop mission-complete-card" aria-live="polite" role="region" aria-label="Mission Complete Screen">
-            <h1 className="mission-title">🏆 Mission Complete! 🚀</h1>
-            <p className="mission-subtitle">You collected all 10 historical artifacts and safely returned home!</p>
+            <h1 className="mission-title">🏆 Ultimate Time Travel Master! 🚀</h1>
+            <p className="mission-subtitle">You conquered all {eras.length} historical eras and collected every legendary artifact!</p>
             
             <div className="mission-artifacts-grid" aria-label="All collected artifacts">
               {artifacts.map(a => (
@@ -225,8 +276,14 @@ export default function App() {
             </div>
 
             <div className="end-actions">
-              <button className="start-btn" onClick={() => setViewState('menu')}>
-                🏠 Return to Main Menu
+              <button className="start-btn cert-btn" onClick={() => setViewState('certificate')}>
+                📜 Print Master Diploma
+              </button>
+              <button className="start-btn activities-btn" onClick={() => setViewState('activities')}>
+                🎮 Play History Mini-Games
+              </button>
+              <button className="nav-btn" onClick={() => setViewState('menu')}>
+                🏠 Main Menu
               </button>
               <button className="reset-adventure-btn" onClick={handleResetProgress}>
                 🔄 Start New Adventure

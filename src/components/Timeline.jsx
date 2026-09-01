@@ -8,10 +8,15 @@ const eraIcons = {
   'ice-age': '🦣',
   'egypt': '🏜️',
   'greece': '🏛️',
+  'rome': '🏟️',
+  'maya': '🛕',
   'middle-ages': '🏰',
+  'japan': '🏯',
   'pirates': '🏴‍☠️',
+  'renaissance': '🎨',
   'wild-west': '🤠',
   'industrial': '🚂',
+  'aviation': '🛩️',
   'retro': '🎸',
   'space-age': '🚀'
 };
@@ -34,7 +39,7 @@ export default function Timeline({ eras, currentEraIndex, unlockedEras, onEraCli
       <div className="timeline-header">
         <div>
           <h1 className="timeline-heading">🗺️ Time Travel Map</h1>
-          <p className="timeline-subheading">Choose an unlocked era to start learning!</p>
+          <p className="timeline-subheading">Choose an unlocked era to start learning! (15 Eras Total)</p>
         </div>
         <button
           onClick={handleHome}
